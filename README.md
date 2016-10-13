@@ -16,7 +16,7 @@ This requires backup.com to login as root on domain.com, so that everything
 will be readable. Login can be automated using key based login. Ideally
 the domain.com server should be setup to only allow key based login and
 not accept remote password based login for root.
-The `lo` script (from my [`lo` repo](/osyed/lo)) can be used to setup key based login.
+The `lo` script (from my [`lo` repo](https://github.com/osyed/lo)) can be used to setup key based login.
 ```
 lo domain = root@domain.com
 lo domain auto
@@ -37,7 +37,7 @@ as the second argument. So in this case the most current backup would be in
 `/backup/domain.com/1`.
 
 If the '1' directory already exists, it will be rename to '2' and the '2' directory
-will be copied back to '1' using hard links reduce disk space usage.
+will be copied back to '1' using hard links to reduce disk space usage.
 
 The backup script does an rsync command to the '1' directory so that only changes will need
 to be transfered over the network.
@@ -49,5 +49,28 @@ Regular backups can be scheduled using cron. For example:
 1 2 * * 1 /root/cron/backitup /backup/domain.com/day/1 /backup/domain.com/week 10 >> /backup/domain.com/log.week
 ```
 
+## Restore procedure
+
+Lets say that the disk on the domain.com server went bad and we replaced the disk with a new one.
+
+Install a minimum operating system on domain.com. Make sure that the 'rsync' command is available on domain.com and that SSH daemon is running.
+
+Setup automatic root login using keys to domain.com from backup.com as described above.
+
+Do the following on the backup server:
+```
+cd backup/domain.com/hour<br>
+cp -al 1 restore        # this should go pretty fact since it is using hard links
+rm -rf restore/dev      # remove the dev directory from the source
+rm -rf restore/proc     # remove the proc directory from the source
+rm -rf restore/tmp      # remove any other directories that don't need to be copied
+rsync --delete-after -aze ssh restore/ root@domain.com:/
+```
+
+Reboot the domain.com server and it should be restored.
+
+You can also use the rsync command to restore just a file or directory. In which case
+you probably don't need to make a copy before restoring and can do the restore from
+the '1' directory itself.
 
 
