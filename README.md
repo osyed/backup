@@ -6,7 +6,7 @@ to a remote backup server or a second disk on the same server. Actually you don'
 have to backup the whole server and can backup any directory on the server. But
 if you start the backup from / you will backup the whole server.
 
-# Backup procedure
+## Backup procedure
 Lets say that domain.com is the server that we want to backup and that
 backup.com is the server where the backup will be made. The backup.com server
 must have very large disks; at least a few times larger than the domain.com server.
@@ -16,7 +16,7 @@ This requires backup.com to login as root on domain.com, so that everything
 will be readable. Login can be automated using key based login. Ideally
 the domain.com server should be setup to only allow key based login and
 not accept remote password based login for root.
-The lo script can be used to setup key based login.
+The `lo` script (from my [`lo` repo](/osyed/lo)) can be used to setup key based login.
 ```
 lo domain = root@domain.com
 lo domain auto
