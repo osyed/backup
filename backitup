@@ -1,0 +1,309 @@
+#!/usr/bin/perl
+
+$Com = <<EOM;
+
+This program can be used to make a backup copy of the maindisk
+to a second backup disk. For example:
+  backitup / /backup/maindisk/daily 7
+where / is the root of the main disk and the second disk is
+mounted as /backup. The number of snapshots to keep is 7.
+
+This program can also be run on a dedicated backup server and
+the source directory can be specified as a remote directory:
+  backitup user@host:/ /backup/maindisk/daily 7
+This will backup everyting under the root directory of the 
+specified host. Key based SSH access must already be setup 
+between the backup server and specified host. Also to backup 
+the entire disk starting at / the user on the specified host 
+must have root access.
+
+If the destination directory or any of its path does not
+exist, it will be created automatically.
+
+In the destination directory a subdirectory called 1 
+will contain a snapshot of the source directory.
+A subdirectory called 2 will contain a previous snapshot,
+3 will contain a snapshot before 2 and so on. The number
+of snapshots to keep is specified as the 3rd argument and
+defaults to 7 if not specified.
+
+The process of creating a snapshot happens as follows:
+1. The snapshot directories are renamed to one number
+   higher. Like 5 becomes 6, 4 becomes 5, so on until
+   1 become 2.
+2. The 2 directory is copied to create the 1 directory
+   or an empty 1 directory is created if there is no
+   2 directory available to copy. The copy is done using
+   hard links so that actual data is not copied and the
+   process goes much faster.
+3. The source directory is rsynced to the 1 directory.
+4. Directories greater than the number to keep are removed.
+   For example if the 3rd argument was 5 then directories
+   6 and greater would be removed.
+
+If the 4th or 5th argument is 'silent' then no messages are
+printed about what the program is doing.
+
+The program is designed to keep a state of what it is doing
+and resume from that state if it is stopped and restarted.
+For example if the program was copying directory 2 to 1 and
+was somehow terminated, it would continue copying directory
+2 to 1 next time the program is started with the same source
+and destination.
+
+The 4th or 5th argument can specify the state in which the
+program should start. Allowed states are:
+  start, renameAll, make1, copy_2_1, rsync_s_1, makeReadme, 
+  removeOld, done, halt
+
+EOM
+
+
+$Rsync =  '/usr/bin/rsync';
+$Rm = '/bin/rm';
+$Mv = '/bin/mv';
+$Mkdir = '/bin/mkdir';
+$Copy = '/bin/cp';
+$Echo = '/bin/echo';
+$Cat = '/usr/bin/cat';
+$Touch = '/usr/bin/touch';
+
+if ($ARGV[0] eq ''){ print $Com; exit; }
+
+$S = $ARGV[0];
+$D = $ARGV[1];
+
+$N = $ARGV[2];
+if ($N eq ""){ $N = 7; }
+
+$State = $ARGV[3];
+if ($ARGV[3] eq 'silent'){
+  $State = $ARGV[4];
+  $Quite = 'silent';
+}
+if ($ARGV[4] eq 'silent'){
+  $Quite = 'silent';
+}
+
+logit("============================");
+
+# remove spaces from the source directory
+$S =~ s/\s//g;
+# add a / to the end of the source directory if needed
+if ($S !~ m%/$%){ $S .= '/'; }
+
+# make sure the source directory exists, unless it is remote
+if ($S !~ m/\:/){
+  if (! -e "$S"){ die "$S does not exist\n"; }
+}
+
+# remove trailing / from destination directory and make sure it exists
+$D =~ s%/$%%;
+if ($D eq ''){ print "Need destination directory\n"; exit; }
+if (! -e "$D"){ 
+  logit("Creating directory $D"); 
+  `$Mkdir -p $D`;
+}
+
+
+$StateFile = "${S}___$D";
+$StateFile =~ s/\W/_/g;
+$StateFile = "/tmp/._$StateFile";
+
+if ($State eq ''){
+  $State = readState();
+}
+
+while($State ne 'done'){
+  my($res);
+  if ($State eq 'renameAll'){ $res = renameAll(); }
+  elsif ($State eq 'make1'){ $res = make1(); }
+  elsif ($State eq 'copy_2_1'){ $res = copy_2_1(); }
+  elsif ($State eq 'rsync_2_1'){ $res = rsync_2_1(); }
+  elsif ($State eq 'rsync_s_1'){ $res = rsync_s_1(); }
+  elsif ($State eq 'makeReadme'){ $res = makeReadme(); }
+  elsif ($State eq 'removeOld'){ $res = removeOld(); }
+  nextState($res);
+}
+
+sub readState{
+  my($fh, $state);
+  if (-e "$StateFile"){
+    open($fh, '<', $StateFile);
+    $state = <$fh>;
+    close $fh;
+    chomp $state;
+    logit("State read from StateFile; state is: '$state'");
+  }
+  else{
+    $state = 'start';
+  }
+  return $state;
+}
+
+sub writeState{
+  my($fh);
+  open($fh, '>', $StateFile);
+  print $fh "$State";
+  close $fh;
+}
+
+sub nextState{
+  my($res) = @_;
+  $State = getNextState($State, $res);
+  if ($State eq 'done'){
+    unlink $StateFile;
+  }
+  else{
+    writeState();
+  }
+}
+
+sub getNextState{
+  my($s, $a) = @_;
+  if ($a eq 'halt'){ return 'done'; }
+  if ($s eq 'start'){ return 'renameAll'; }
+  if ($s eq 'renameAll'){ return 'make1'; }
+  if ($s eq 'make1'){ 
+    if ($a eq 'copy_2_1'){ return 'copy_2_1'; }
+    if ($a eq 'rsync_2_1'){ return 'rsync_2_1'; }
+    return 'rsync_s_1'; 
+  }
+  if ($s eq 'copy_2_1'){ return 'rsync_s_1'; }
+  if ($s eq 'rsync_2_1'){ return 'rsync_s_1'; }
+  if ($s eq 'rsync_s_1'){ return 'makeReadme'; }
+  if ($s eq 'makeReadme'){ return 'removeOld'; }
+  if ($s eq 'removeOld'){ return 'done'; }
+  return 'done';
+}
+
+sub deleteOrMove{
+  my($i, $j);
+# delete all directories with a number greater than $N
+# else rename the directory to be one number greater
+  for($i=1000; $i>0; $i--){
+    if (-e "$D/$i"){
+      if ($i > $N){
+        logit("deleting directory $i; greater than $N");
+        `$Rm -rf "$D/$i"`;
+      }
+      else{
+        $j = $i + 1;
+        logit("renaming directory $i to $j");
+        `$Mv $D/$i $D/$j`;
+      }
+    }
+  }
+}
+
+sub removeOld{
+  my($i, $j);
+# delete all directories with a number greater than $N
+  for($i=1000; $i>0; $i--){
+    if (-e "$D/$i"){
+      if ($i > $N){
+        logit("deleting directory $i; greater than $N");
+        `$Rm -rf "$D/$i"`;
+      }
+    }
+  }
+}
+
+sub renameAll{
+  my($i, $j);
+# rename the directory to be one number greater
+  for($i=1000; $i>0; $i--){
+    if (-e "$D/$i"){
+      $j = $i + 1;
+      logit("renaming directory $i to $j");
+      `$Mv $D/$i $D/$j`;
+    }
+  }
+}
+
+
+sub make1Old{
+# rename the directory with the number $N+1 to 1
+# or create the 1 directory if it does not exist
+  $i = $N+1;
+  if (-e "$D/$i"){
+    logit("renaming directory $i to 1");
+    `$Mv $D/$i $D/1`;
+    `$Touch $D/1`;
+    if ($i != 2){
+      return 'rsync_2_1';
+    }
+  }
+  if (! -e "$D/1"){
+    if (-e "$D/2"){
+      return 'copy_2_1';
+    }
+    else{
+      logit("creating directory 1");
+      `$Mkdir $D/1`;
+    }
+  }
+}
+
+sub make1{
+# Copy 2 to 1 or create an empty 1 directory
+  if (-e "$D/2"){
+    return 'copy_2_1';
+  }
+  else{
+    logit("creating directory 1");
+    `$Mkdir $D/1`;
+  }
+}
+
+sub copy_2_1{
+  logit("copying directory 2 to 1 using hard links");
+# use cp -al to reduce space; as suggested here http://www.mikerubel.org/computers/rsync_snapshots/
+  `$Copy -al $D/2/. $D/1`;
+}
+
+sub rsync_2_1{
+  logit("rsync directory 2 to 1");
+  `$Rsync -a $D/2/ $D/1`;
+}
+
+sub rsync_s_1{
+  logit("rsyncing $S to directory 1");
+#print `$Rsync -ax --delete $S $D/1`;
+  if ($S =~ m/\:/){
+    logit("source is remote");
+    print `$Rsync -axz --delete -e ssh $S $D/1`;
+  }
+  else{
+    logit("source is local");
+    print `$Rsync -ax --delete $S $D/1`;
+  }
+}
+
+
+sub makeReadme{
+  my($x);
+  `$Touch $D/1`;
+  logit("creating the README file in $D");
+  $x = <<EOM;
+
+The most current backup is in a subdirectory called 1. The
+previous backup is in 2 and so on. Each contains a full
+snapshot.
+
+The oldest snapshot is in $N.
+
+EOM
+
+  open(FH, ">$D/README.backitup");
+  print FH $x;
+  close FH;
+}
+
+sub logit{
+  my($m) = @_;
+  if (! $Quite){ 
+    print localtime(time) . "  $m\n";
+  }
+}
+

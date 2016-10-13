@@ -1,10 +1,14 @@
-# backup
+# backitup
 Script to backup a server to a remote backup server
 
 This script can be used to setup automatic rotating snapshots of your primary server
 to a remote backup server or a second disk on the same server. Actually you don't
 have to backup the whole server and can backup any directory on the server. But
 if you start the backup from / you will backup the whole server.
+
+You can run the `backitup` script without any arguments to usage help. The basic
+strategy for how to setup an automatic backup and restoring from backup are
+discussed below.
 
 ## Backup procedure
 Lets say that domain.com is the server that we want to backup and that
