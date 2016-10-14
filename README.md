@@ -84,4 +84,10 @@ You can also use the rsync command to restore just a file or directory. In which
 you probably don't need to make a copy before restoring and can do the restore from
 the '1' directory itself.
 
+## See also
+A very good write up about backups can be found here:
+[Easy Automated Snapshot-Style Backups with Linux and Rsync](http://www.mikerubel.org/computers/rsync_snapshots/)
+It has a suggestion of recycling the oldest snapshot by renaming it to '1'.
+but it causes problems when '2' is copied to '1' using hard links.
+
 
