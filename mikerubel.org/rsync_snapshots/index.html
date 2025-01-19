@@ -1,1 +1,1526 @@
-coming soon
+
+<!-- saved from url=(0051)http://www.mikerubel.org/computers/rsync_snapshots/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Easy Automated Snapshot-Style Backups with Rsync</title>
+<link rel="icon" href="http://www.mikerubel.org/favicon.ico" type="image/icon">
+<link rel="stylesheet" href="./index_files/style.css" type="text/css">
+<meta name="keywords" content="rsync, snapshot, backup, linux, unix, hard-link, rubel">
+<meta name="description" content="How to make easy, automated snapshot-style backups with rsync and UNIX">
+<style type="text/css">:root [href^="//mage98rquewz.com/"], :root [href^="//x4pollyxxpush.com/"], :root span[id^="ezoic-pub-ad-placeholder-"], :root ins.adsbygoogle[data-ad-slot], :root ins.adsbygoogle[data-ad-client], :root guj-ad, :root gpt-ad, :root div[id^="zergnet-widget"], :root div[id^="vuukle-ad-"], :root div[id^="taboola-stream-"], :root div[id^="sticky_ad_"], :root div[id^="st"][style^="z-index: 999999999;"], :root div[id^="ezoic-pub-ad-"], :root div[id^="div-gpt-"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"]):not([style="pointer-events: none; height: 1px; width: 0px; opacity: 0; visibility: hidden; position: fixed; bottom: 0px;"]), :root div[id^="dfp-ad-"], :root div[id^="crt-"][style], :root div[id^="adspot-"], :root div[id^="adrotate_widgets-"], :root ps-connatix-module, :root div[id^="ad_position_"], :root div[id*="ScriptRoot"], :root div[id*="MarketGid"], :root div[data-id-advertdfpconf], :root div[data-dfp-id], :root hl-adsense, :root div[data-contentexchange-widget], :root div[data-alias="300x250 Ad 2"], :root div[data-adzone], :root div[data-adunit-path], :root div[data-adname], :root div[data-ad-targeting], :root div[data-ad-placeholder], :root div[aria-label="Ads"], :root display-ads, :root display-ad-component, :root aside[id^="adrotate_widgets-"], :root ark-top-ad, :root amp-fx-flying-carpet, :root amp-embed[type="taboola"], :root amp-connatix-player, :root amp-ad-custom, :root amp-ad, :root div[id^="google_dfp_"], :root ad-slot, :root ad-shield-ads, :root a[style="width:100%;height:100%;z-index:10000000000000000;position:absolute;top:0;left:0;"], :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"] + .ob_source, :root a[href^="https://xbet-4.com/"], :root div[id^="ad-position-"], :root a[href^="https://www.toprevenuegate.com/"], :root a[href^="https://www.purevpn.com/"][href*="&utm_source=aff-"], :root a[href^="https://www.privateinternetaccess.com/"] > img, :root a[href^="https://www.onlineusershielder.com/"], :root a[href^="https://www.infowarsstore.com/"] > img, :root a[href^="https://www.highperformancecpmgate.com/"], :root a[href^="https://www.highcpmrevenuenetwork.com/"], :root a[href^="https://lnkxt.bannerator.com/"], :root a[href^="https://www.geekbuying.com/dynamic-ads/"], :root a[href^="https://www.financeads.net/tc.php?"], :root [href^="https://www.herbanomic.com/"] > img, :root a[href^="https://maymooth-stopic.com/"], :root a[href^="https://www.dql2clk.com/"], :root a[href^="https://www.nutaku.net/signup/landing/"], :root a[href^="https://www.dating-finder.com/signup/?ai_d="], :root a[href^="https://explore-site.com/"], :root a[href^="https://www.brazzersnetwork.com/landing/"], :root a[href^="https://www.adxsrve.com/"], :root [data-template-type="nativead"], :root a[href^="https://www.endorico.com/Smartlink/"], :root a[href^="https://www.adultempire.com/"][href*="?partner_id="], :root [data-ad-manager-id]:not([style$="left: -10000px !important; top: -1000px !important;"]):not(.adsbygoogle), :root a[href^="https://voluum.prom-xcams.com/"], :root div[data-type="_mgwidget"]:not(.eyeo), :root a[href^="https://twinrdsrv.com/"], :root a[href^="https://trk.nfl-online-streams.club/"], :root a[href^="https://tracking.avapartner.com/"], :root a[href^="https://track.wg-aff.com"], :root a[href^="https://track.ultravpn.com/"], :root a[href^="https://track.afcpatrk.com/"], :root a[href^="https://torguard.net/aff.php"] > img, :root [data-identity="adhesive-ad"], :root a[href^="https://tc.tradetracker.net/"] > img, :root a[href^="https://tatrck.com/"], :root a[href^="https://click.candyoffers.com/"], :root [href^="https://zstacklife.com/"] img, :root a[href^="https://t.aslnk.link/"], :root a[href^="https://t.adating.link/"], :root a[href^="https://land.brazzersnetwork.com/landing/"], :root a[href^="https://t.acam.link/"], :root a[href*="//daichoho.com/"], :root a[href^="https://syndication.optimizesrv.com/"], :root a[href^="https://go.trackitalltheway.com/"], :root [href^="https://track.fiverr.com/visit/"] > img, :root a[href^="https://syndication.exoclick.com/"], :root a[href^="https://syndication.dynsrvtbg.com/"], :root div[data-alias="300x250 Ad 1"], :root a[href^="https://syndicate.contentsserved.com/"], :root a[href^="https://svb-analytics.trackerrr.com/"], :root a[href^="https://ad.doubleclick.net/"], :root a[href^="https://static.fleshlight.com/images/banners/"], :root a[href^="https://slkmis.com/"], :root bottomadblock, :root a[href^="https://s.zlinkd.com/"], :root a[href^="https://s.zlink3.com/"], :root a[href^="https://www.mrskin.com/account/"], :root a[href^="https://s.optzsrv.com/"], :root #kt_player > div[style$="display: block;"][style*="inset: 0px;"], :root a[href^="https://quotationfirearmrevision.com/"], :root a[href^="https://pubads.g.doubleclick.net/"], :root a[href^="https://ak.oalsauwy.net/"], :root a[href^="https://softwa.cfd/"], :root a[href^="https://play1ad.shop/"], :root a[href^="https://prf.hn/click/"][href*="/camref:"] > img, :root a[href^="https://www.dating-finder.com/?ai_d="], :root a[href^="https://serve.awmdelivery.com/"], :root a[href^="https://prf.hn/click/"][href*="/adref:"] > img, :root app-ad, :root [href^="https://ap.octopuspop.com/click/"] > img, :root a[href^="https://postback1win.com/"], :root a[href^="https://www.googleadservices.com/pagead/aclk?"] > img, :root img[src^="https://images.purevpnaffiliates.com"], :root a[href^="https://clickadilla.com/"], :root a[href^="https://click.dtiserv2.com/"], :root a[href^="https://porntubemate.com/"], :root a[href^="https://mmwebhandler.aff-online.com/"], :root a[href^="https://www.bet365.com/"][href*="affiliate="], :root a[href^="https://pb-track.com/"], :root a[href^="https://pb-front.com/"], :root a[href^="https://paid.outbrain.com/network/redir?"], :root a[href^="https://streamate.com/landing/click/"], :root div[class^="Adstyled__AdWrapper-"], :root a[href^="https://startgaming.net/tienda/" i], :root a[href^="https://osfultrbriolenai.info/"], :root a[href^="https://upsups.click/"], :root a[href^="https://ndt5.net/"], :root a[href^="http://eighteenderived.com/"], :root a[href^="https://natour.naughtyamerica.com/track/"], :root a[href^="https://mediaserver.entainpartners.com/renderBanner.do?"], :root a[href^="https://m.do.co/c/"] > img, :root .nya-slot[style], :root a[href^="https://a.bestcontentweb.top/"], :root a[href^="https://lobimax.com/"], :root a[href^="https://lead1.pl/"], :root a[href^="https://landing.brazzersnetwork.com/"], :root a[href^="https://join.virtuallust3d.com/"], :root a[href^="https://kiksajex.com/"], :root a[href^="https://juicyads.in/"], :root a[href^="https://snowdayonline.xyz/"], :root a[href^="https://mediaserver.gvcaffiliates.com/renderBanner.do?"], :root a[href^="https://join.dreamsexworld.com/"], :root a[href^="https://jaxofuna.com/"], :root a[href^="https://itubego.com/video-downloader/?affid="], :root a[href^="https://italarizege.xyz/"], :root a[href^="https://iqbroker.com/"][href*="?aff="], :root a[href^="https://hot-growngames.life/"], :root a[href^="https://helmethomicidal.com/"], :root a[href^="https://go.xxxvjmp.com/"], :root [class^="tile-picker__CitrusBannerContainer-sc-"], :root a[href^="https://go.xxxiijmp.com"], :root a[href^="https://go.xtbaffiliates.com/"], :root [data-role="tile-ads-module"], :root a[href^="https://go.xlviirdr.com"], :root a[href^="https://go.xlviiirdr.com"], :root a[href^="https://ismlks.com/"], :root [href^="https://www.mypillow.com/"] > img, :root a[href^="https://go.xlirdr.com"], :root [data-css-class="dfp-inarticle"], :root a[href^="https://l.hyenadata.com/"], :root a[href^="https://go.tmrjmp.com"], :root a[href^="https://zirdough.net/"], :root a[href^="https://s.deltraff.com/"], :root a[href^="https://go.markets.com/visit/?bta="], :root a[href^="https://billing.purevpn.com/aff.php"] > img, :root a[href^="https://go.hpyrdr.com/"], :root a[href^="https://lijavaxa.com/"], :root a[href^="https://go.goaserv.com/"], :root a[href^="https://t.hrtye.com/"], :root a[href^="https://go.etoro.com/"] > img, :root a[href^="https://go.dmzjmp.com"], :root a[href^="https://www.bang.com/?aff="], :root #mgb-container > #mgb, :root a[href^="https://go.admjmp.com"], :root a[href^="https://ak.stikroltiltoowi.net/"], :root a[href^="https://get.surfshark.net/aff_c?"][href*="&aff_id="] > img, :root a[href^="https://www.mrskin.com/tour"], :root a[href^="https://financeads.net/tc.php?"], :root a[href^="https://www.adskeeper.com"], :root a[data-redirect^="https://paid.outbrain.com/network/redir?"], :root [href^="https://clicks.affstrack.com/"] > img, :root a[href^="https://ak.hauchiwu.com/"], :root a[href^="https://engine.phn.doublepimp.com/"], :root a[href^="https://engine.blueistheneworanges.com/"], :root a[href^="https://drumskilxoa.click/"], :root a[href^="https://dl-protect.net/"], :root a[href^="https://rixofa.com/"], :root #ads[style^="position: absolute; z-index: 30; width: 100%; height"], :root a[href^="https://disobediencecalculatormaiden.com/"], :root a[href*=".foxqck.com/"], :root a[href^="https://ctosrd.com/"], :root [href^="https://noqreport.com/"] > img, :root a[href^="https://clicks.pipaffiliates.com/"], :root app-advertisement, :root a[href^="https://getmatchedlocally.com/"], :root a[href^="https://clickins.slixa.com/"], :root a[href^="https://datewhisper.life/"], :root a[href^="https://get-link.xyz/"], :root a[href^="https://click.linksynergy.com/fs-bin/"] > img, :root a[href^="https://combodef.com/"], :root a[href^="https://click.hoolig.app/"], :root a[href^="https://track.totalav.com/"], :root a[href^="https://ctrdwm.com/"], :root a[href^="https://go.xlvirdr.com"], :root a[href^="http://www.iyalc.com/"], :root a[href^="https://claring-loccelkin.com/"], :root a[href^="https://s.ma3ion.com/"], :root a[href^="https://cams.imagetwist.com/in/?track="], :root a[href^="https://bongacams2.com/track?"], :root a[href^="https://t.ajrkm1.com/"], :root [href="https://masstortfinancing.com"] img, :root a[href^="https://bongacams10.com/track?"], :root a[href^="https://www.sheetmusicplus.com/"][href*="?aff_id="], :root a[href^="https://bngpt.com/"], :root a[href^="https://black77854.com/"], :root a[href^="https://banners.livepartners.com/"], :root a[href^="http://revolvemockerycopper.com/"], :root a[href^="https://awptjmp.com/"], :root a[href^="https://join.sexworld3d.com/track/"], :root a[href^="https://intenseaffiliates.com/redirect/"], :root a[href^="https://aweptjmp.com/"], :root [class^="s2nPlayer"], :root a[href^="https://chaturbate.jjgirls.com/?track="], :root a[href^="https://ausoafab.net/"], :root a[href^="https://activate-game.com/"], :root .scroll-fixable.rail-right > .deals-rail, :root [data-wpas-zoneid], :root a[href^="https://a2.adform.net/"], :root a[href^="https://auesk.cfd/"], :root a[href^="https://ak.psaltauw.net/"], :root a[href^="https://adclick.g.doubleclick.net/"], :root a[href^="https://bc.game/"], :root a[href^="https://a.bestcontentoperation.top/"], :root a[href^="https://adultfriendfinder.com/go/"], :root a[href^="https://ads.planetwin365affiliate.com/"], :root a[href^="https://ads.leovegas.com/"], :root a[href^="https://a.candyai.love/"], :root a[href^="https://playnano.online/offerwalls/?ref="], :root a[href^="https://a.adtng.com/"], :root [data-m-ad-id], :root a[href^="https://a-ads.com/"], :root div[id^="rc-widget-"], :root a[href^="http://eslp34af.click/"], :root a[href^="https://turnstileunavailablesite.com/"], :root a[href^="https://chaturbate.com/in/?"], :root a[href^="https://prf.hn/click/"][href*="/creativeref:"] > img, :root a[href*="&maxads="], :root a[href^="http://www.adultempire.com/unlimited/promo?"][href*="&partner_id="], :root a[href^="https://1betandgonow.com/"], :root a[href^="https://eergortu.net/"], :root div[data-adunit], :root app-large-ad, :root [href^="https://turtlebids.irauctions.com/"] img, :root [data-advadstrackid]:not([style$="left: -10000px !important; top: -1000px !important;"]):not(.adsbygoogle), :root div[id^="optidigital-adslot"], :root a[href^="https://123-stream.org/"], :root a[href^="http://www.friendlyduck.com/AF_"], :root a[href^="https://allhost.shop/aff.php?"], :root [data-dynamic-ads], :root a[href^="http://vnte9urn.click/"], :root a[href^="https://getvideoz.click/"], :root a[href^="http://troopsassistedstupidity.com/"], :root a[href^="http://trk.globwo.online/"], :root a[href^="https://random-affiliate.atimaze.com/"], :root a-ad, :root a[href^="https://offhandpump.com/"], :root a[href^="http://stickingrepute.com/"], :root #slashboxes > .deals-rail, :root a[href^="http://premonitioninventdisagree.com/"], :root a[href^="http://naggingirresponsible.com/"], :root a[href^="https://in.rabbtrk.com/"], :root a[href^="http://www.h4trck.com/"], :root a[href^="https://81ac.xyz/"], :root a[href^="http://guestblackmail.com/"], :root a[href^="http://cam4com.go2cloud.org/aff_c?"], :root a[href^="https://ads.betfair.com/redirect.aspx?"], :root [href^="https://www.mypatriotsupply.com/"] > img, :root a[href^="https://trk.softonixs.xyz/"], :root a[href^="https://sexynearme.com/"], :root a[href^="https://myclick-2.com/"], :root a[href^="http://dragnag.com/"], :root a[href^="http://dragfault.com/"], :root .ob_container .item-container-obpd, :root a[href^="https://www8.smartadserver.com/"], :root a[href^="https://pb-imc.com/"], :root a[href^="http://deskfrontfreely.com/"], :root a[href^="http://muzzlematrix.com/"], :root a[href^="https://track.adform.net/"], :root a[href^="http://avthelkp.net/"], :root a[href^="https://a.medfoodhome.com/"], :root a[href^="https://engine.flixtrial.com/"], :root [data-type="ad-vertical"], :root [data-taboola-options], :root a[href^="http://annulmentequitycereals.com/"], :root a[href^="//startgaming.net/tienda/" i], :root a[href^="https://www.get-express-vpn.com/offer/"], :root a[href^="https://s.cant3am.com/"], :root a[href^="//s.st1net.com/splash.php"], :root a[href^="https://join.virtualtaboo.com/track/"], :root [id^="ad_sky"], :root a[href^="http://coefficienttolerategravel.com/"], :root a[href^="https://a.medfoodsafety.com/"], :root a[href^="//go.eabids.com/"], :root a[href^="//ejitsirdosha.net/"], :root a[href^=" https://www.friendlyduck.com/AF_"], :root a[href*="/jump/next.php?r="], :root [href^="https://ilovemyfreedoms.com/landing-"], :root a[href^="https://go.nordvpn.net/aff"] > img, :root .\[\&_\.gdprAdTransparencyCogWheelButton\]\:\!pjra-z-\[5\], :root [href^="http://clicks.totemcash.com/"], :root a[href^="https://ad.zanox.com/ppc/"] > img, :root a[href^="https://lone-pack.com/"], :root [data-d-ad-id], :root a[href*=".engine.adglare.net/"], :root a[href^="https://t.ajrkm3.com/"], :root [href^="https://aads.com/campaigns/"], :root a[href^="//stighoazon.com/"], :root [href^="https://www.profitablegatecpm.com/"], :root div[id^="lazyad-"], :root a[href^="http://com-1.pro/"], :root a[href*=".cfm?domain="][href*="&fp="], :root [data-ad-name], :root a[href^="https://loboclick.com/"], :root a[data-url^="https://vulpix.bet/?ref="], :root a[href^="https://ab.advertiserurl.com/aff/"], :root a[data-oburl^="https://paid.outbrain.com/network/redir?"], :root [onclick*="content.ad/"], :root [name^="google_ads_iframe"], :root [id^="section-ad-banner"], :root a[href^="https://go.xlivrdr.com"], :root [onclick^="location.href='https://1337x.vpnonly.site/"], :root a[href^="https://golinks.work/"], :root div[id^="gpt_ad_"], :root [id^="div-gpt-ad"]:not([style^="width: 1px; height: 1px; position: absolute; left: -10000px; top: -"]):not([style="pointer-events: none; height: 1px; width: 0px; opacity: 0; visibility: hidden; position: fixed; bottom: 0px;"]), :root a[href^="https://www.goldenfrog.com/vyprvpn?offer_id="][href*="&aff_id="], :root a[href*="//jjgirls.com/sex/Chaturbate"], :root [id^="ad-wrap-"], :root [href^="https://zone.gotrackier.com/"], :root a[href^="http://sarcasmadvisor.com/"], :root [href^="https://www.restoro.com/"], :root [href^="https://www.targetingpartner.com/"], :root .section-subheader > .section-hotel-prices-header, :root [href^="https://www.hostg.xyz/"] > img, :root a[href^="http://adultfriendfinder.com/go/"], :root a[href^="https://fastestvpn.com/lifetime-special-deal?a_aid="], :root a[href^="https://tour.mrskin.com/"], :root citrus-ad-wrapper, :root a[onmousedown^="this.href='https://paid.outbrain.com/network/redir?"][target="_blank"], :root a[href^="https://go.grinsbest.com/"], :root a[href^="https://vo2.qrlsx.com/"], :root [href^="https://www.avantlink.com/click.php"] img, :root [data-ad-width]:not([style$="left: -10000px !important; top: -1000px !important;"]):not(.adsbygoogle), :root [data-block-type="ad"], :root div[id^="ad-div-"], :root [data-ad-module]:not([style$="left: -10000px !important; top: -1000px !important;"]):not(.adsbygoogle), :root a[href^="https://baipahanoop.net/"], :root [href^="https://v.investologic.co.uk/"], :root div[id^="div-ads-"], :root [href^="https://rapidgator.net/article/premium/ref/"], :root [href^="https://join.girlsoutwest.com/"], :root a[href^="https://track.aftrk3.com/"], :root [href^="https://join3.bannedsextapes.com"], :root a[href^="https://bodelen.com/"], :root a[href*=".g2afse.com/"], :root div[id^="adngin-"], :root [data-rc-widget], :root span[data-ez-ph-id], :root [href^="https://track.aftrk1.com/"], :root [href^="https://join.playboyplus.com/track/"], :root [href^="https://wct.link/click?"], :root [href^="https://go.xlrdr.com"], :root a[href^="https://tm-offers.gamingadult.com/"], :root [href^="https://charmingdatings.life/"], :root [href^="https://glersakr.com/"], :root a[href^="https://a.bestcontentfood.top/"], :root [href^="https://cpa.10kfreesilver.com/"], :root a[data-href^="http://ads.trafficjunky.net/"], :root a[href^="http://partners.etoro.com/"], :root a[href^="https://www.friendlyduck.com/AF_"], :root [href^="https://ad1.adfarm1.adition.com/"], :root a[href^="https://bngprm.com/"], :root [href^="https://shiftnetwork.infusionsoft.com/go/"] > img, :root a[href^="https://go.strpjmp.com/"], :root a[href^="https://go.bushheel.com/"], :root a[href^="https://ctjdwm.com/"], :root a[href^="https://camfapr.com/landing/click/"], :root div[data-ad-wrapper], :root .gnt_em_vp_c[data-g-s="vp_dk"], :root [href="//sexcams.plus/"], :root [href^="http://www.mypillow.com/"] > img, :root [href^="https://awbbjmp.com/"], :root a[href^="https://tracker.loropartners.com/"], :root #kt_player > a[target="_blank"], :root a[href^="http://bongacams.com/track?"], :root [href^="http://mypillow.com/"] > img, :root [href="https://ourgoldguy.com/contact/"] img, :root #teaser3[style="width: 100%;text-align: center;display: scroll;position:fixed;bottom: 0;margin: 0 auto;z-index: 103;"], :root [href="https://www.masstortfinancing.com/"] > img, :root a[href^="https://go.rmhfrtnd.com/"], :root [href="https://jdrucker.com/gold"] > img, :root a[href^="https://track.1234sd123.com/"], :root zeus-ad, :root [data-testid="prism-ad-wrapper"], :root [href^="https://ad.admitad.com/"], :root [href^="https://mypillow.com/"] > img, :root [data-testid="ad_testID"], :root [href^="https://antiagingbed.com/discount/"] > img, :root a[href*=".adsrv.eacdn.com/"], :root [href^="https://optimizedelite.com/"] > img, :root [data-name="adaptiveConstructorAd"], :root a[href^="https://go.cmtaffiliates.com/"], :root [data-testid="adBanner-wrapper"], :root [href^="https://mylead.global/stl/"] > img, :root [href^="https://mypatriotsupply.com/"] > img, :root a[href^="https://go.hpyjmp.com"], :root [href^="https://mystore.com/"] > img, :root div[class*="publift-widget-"]:has(.fuse-slot-sticky), :root a[href^="https://witnessjacket.com/"], :root [data-mobile-ad-id], :root [class^="amp-ad-"], :root a[href^="http://handgripvegetationhols.com/"], :root a[href^="https://bs.serving-sys.com"], :root a[href^="https://go.bbrdbr.com"], :root a[href^="https://fc.lc/ref/"], :root [data-adshim], :root topadblock, :root a[href^="//s.zlinkd.com/"], :root [data-id^="div-gpt-ad"], :root #teaser1[style^="width:autopx;"], :root [href^="https://www.cloudways.com/en/?id"], :root [data-asg-ins], :root [data-desktop-ad-id], :root a[href^="https://gamingadlt.com/?offer="], :root a[href^="https://www.liquidfire.mobi/"], :root .grid > .container > #aside-promotion, :root DFP-AD, :root [id^="ad_slider"], :root [data-adbridg-ad-class], :root AMP-AD, :root [data-ad-cls], :root [data-ez-name], :root [href^="https://www.brighteonstore.com/products/"] img, :root a[href^="https://go.mnaspm.com/"], :root a[href^="https://service.bv-aff-trx.com/"], :root a[href^="https://6-partner.com/"], :root a[href^="https://go.xxxijmp.com"], :root [href^="https://istlnkcl.com/"], :root div[id*="ScriptRoot"]:not(.eyeo), :root a[href^="https://clixtrac.com/"], :root atf-ad-slot, :root [data-adblockkey]:not([style$="left: -10000px !important; top: -1000px !important;"]):not(html):not(.adsbygoogle), :root a[href^="https://traffdaq.com/"], :root [class^="div-gpt-ad"], :root a[href^="http://tc.tradetracker.net/"] > img, :root [href^="https://affiliate.fastcomet.com/"] > img, :root [class^="adDisplay-module"], :root [data-freestar-ad][id], :root AD-SLOT, :root a[href^="https://go.skinstrip.net"][href*="?campaignId="], :root #teaser2[style^="width:autopx;"], :root a[href^="https://ngineet.cfd/"], :root [data-revive-zoneid], :root a[href^="https://losingoldfry.com/"], :root a[href^="https://gml-grp.com/"], :root .ob_dual_right > .ob_ads_header ~ .odb_div, :root #teaser3[style^="width:autopx;"], :root a[href^="https://cam4com.go2cloud.org/"], :root a[href^="http://li.blogtrottr.com/click?"], :root a[href^="https://t.ajump1.com/"], :root a[href^="https://go.xxxjmp.com"], :root #leader-companion > a[href], :root #target.pk-page-ready #pk-status-message { display: none !important; }</style><style type="text/css" id="operaUserStyle"></style></head>
+
+<body>
+<table class="header"><tbody><tr><td>
+<a href="http://www.mikerubel.org/index.html">Home</a></td>
+<td style="text-align: right">
+<a href="http://www.mikerubel.org/private/index.html">Private Stuff</a>  |  <a href="http://www.mikerubel.org/contact/index.html">Contact</a>
+</td></tr></tbody></table>
+<div class="bodydiv">
+
+<div class="article">
+<h1><em>Easy</em> Automated Snapshot-Style Backups with Linux and Rsync</h1>
+
+<p>page last modified 2004.01.04</p>
+
+<p class="important">
+
+<b>Updates:</b>  As of <code>rsync-2.5.6</code>, the
+<code>--link-dest</code> option is now standard!  That can be used instead
+of the separate <code>cp -al</code> and <code>rsync</code> stages, and it
+eliminates the ownerships/permissions bug.  I now recommend using it.
+
+Also, I'm proud to report this article is mentioned in <a href="http://www.oreilly.com/catalog/linuxsvrhack/">Linux Server Hacks</a>,
+a new (and very good, in my opinion) O'Reilly book by compiled by Rob
+Flickenger.
+
+</p>
+
+
+<h2>Contents</h2>
+
+<ol>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Abstract">Abstract</a></li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Motivation">Motivation</a></li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Rsync">Using <code>rsync</code> to make a backup</a>
+<ol>
+ <li>Basics</li>
+ <li>Using the <code>--delete</code> flag</li>
+ <li>Be lazy: use <code>cron</code></li>
+</ol>
+</li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Incremental">Incremental backups with <code>rsync</code></a>
+<ol>
+ <li>Review of hard links</li>
+ <li>Using <code>cp -al</code></li>
+ <li>Putting it all together</li>
+ <li>I'm used to <code>dump</code> or <code>tar</code>!  This seems backward!</li>
+</ol>
+</li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Isolation">Isolating the backup from the rest of the system</a>
+<ol>
+ <li>The easy (bad) way</li>
+ <li>Keep it on a separate partition</li>
+ <li>Keep that partition on a separate disk</li>
+ <li>Keep that disk on a separate machine</li>
+</ol>
+</li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#ReadOnly">Making the backup as read-only as possible</a>
+<ol>
+ <li>Bad: <code>mount</code>/<code>unmount</code></li>
+ <li>Better: <code>mount</code> read-only most of the time</li>
+ <li>Tempting but it doesn't seem to work: the 2.4 kernel's <code>mount --bind</code></li>
+ <li>My solution: using NFS on localhost</li>
+</ol>
+</li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Extensions">Extensions: hourly, daily, and weekly snapshots</a>
+<ol>
+ <li>Keep an extra script for each level</li>
+ <li>Run it all with <code>cron</code></li>
+</ol>
+</li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Bugs">Known bugs and problems</a>
+<ol>
+ <li>Maintaining Permissions and Owners in the snapshots</li>
+ <li><code>mv</code> updates timestamp bug</li>
+ <li>Windows-related problems</li>
+</ol>
+</li><li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Appendix">Appendix: my actual configuration</a>
+<ol>
+<li>Listing one: <code>make_snapshot.sh</code></li>
+<li>Listing two: <code>daily_snapshot_rotate.sh</code></li>
+<li>Sample output of <code>ls -l /snapshot/home</code></li>
+</ol>
+</li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#Contrib">Contributed codes</a></li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#References">References</a></li>
+<li><a href="http://www.mikerubel.org/computers/rsync_snapshots/#FAQ">Frequently Asked Questions</a></li>
+</ol>
+
+<h2>
+<a name="Abstract">Abstract</a>
+</h2>
+
+<p>
+
+This document describes a method for generating automatic rotating
+"snapshot"-style backups on a Unix-based system, with specific examples
+drawn from the author's GNU/Linux experience.  Snapshot backups are a
+feature of some high-end industrial file servers; they create the
+<em>illusion</em> of multiple, full backups per day without the space or
+processing overhead.  All of the snapshots are read-only, and are accessible
+directly by users as special system directories.  It is often possible to
+store several hours, days, and even weeks' worth of snapshots with slightly
+more than 2x storage.  This method, while not as space-efficient as some of
+the proprietary technologies (which, using special copy-on-write
+filesystems, can operate on slightly more than 1x storage), makes use of
+only standard file utilities and the common <a href="http://rsync.samba.org/">rsync</a> program, which is installed by
+default on most Linux distributions.  Properly configured, the method can
+also protect against hard disk failure, root compromises, or even back up a
+network of heterogeneous desktops automatically.
+
+</p>
+
+<h2>
+<a name="Motivation">Motivation</a>
+</h2>
+
+<p>
+
+Note: what follows is the original <a href="http://www.sgvlug.org/">sgvlug</a> DEVSIG announcement.
+
+</p><p>
+
+Ever accidentally delete or overwrite a file you were working on?  Ever lose
+data due to hard-disk failure?  Or maybe you export shares to your
+windows-using friends--who proceed to get outlook viruses that twiddle a
+digit or two in all of their .xls files.  Wouldn't it be nice if there were
+a <code>/snapshot</code> directory that you could go back to, which had complete
+images of the file system at semi-hourly intervals all day, then daily
+snapshots back a few days, and maybe a weekly snapshot too?  What if every
+user could just go into that magical directory and copy deleted or
+overwritten files back into "reality", from the snapshot of choice, without
+any help from you?  And what if that <code>/snapshot</code> directory were
+read-only, like a CD-ROM, so that nothing could touch it (except maybe root,
+but even then not directly)?
+
+</p><p>
+
+Best of all, what if you could make all of that happen automatically, using
+<em>only one extra, slightly-larger, hard disk</em>?  (Or one extra
+partition, which would protect against all of the above except disk
+failure).
+
+</p><p>
+
+In my lab, we have a proprietary NetApp file server which provides that sort of
+functionality to the end-users.  It provides a lot of other things too, but
+it cost as much as a luxury SUV.  It's quite appropriate for our heavy-use
+research lab, but it would be overkill for a home or small-office
+environment.  But that doesn't mean small-time users have to do without!
+
+</p><p>
+
+I'll show you how I configured automatic, rotating snapshots on my $80 used
+Linux desktop machine (which is also a file, web, and mail server) using
+only a couple of one-page scripts and a few standard Linux utilities that
+you probably already have.
+
+</p><p>
+
+I'll also propose a related strategy which employs one (or two, for the
+wisely paranoid) extra low-end machines for a complete, responsible,
+automated backup strategy that eliminates tapes and manual labor and makes
+restoring files as easy as "cp".
+
+</p>
+
+<h2>
+<a name="Rsync">Using <code>rsync</code> to make a backup</a>
+</h2>
+
+<p>
+
+The <code>rsync</code> utility is a very well-known piece of GPL'd software,
+written originally by Andrew Tridgell and Paul Mackerras.  If you have a
+common Linux or UNIX variant, then you probably already have it installed;
+if not, you can download the source code from <a href="http://rsync.samba.org/">rsync.samba.org</a>.  Rsync's specialty is
+efficiently synchronizing file trees across a network, but it works fine on
+a single machine too.
+
+</p>
+
+<h3>Basics</h3>
+
+<p>
+
+Suppose you have a directory called <code>source</code>, and you want to
+back it up into the directory <code>destination</code>.  To accomplish that,
+you'd use:
+
+</p>
+
+<pre>rsync -a source/ destination/
+</pre>
+
+<p>
+
+(Note: I usually also add the <code>-v</code> (verbose) flag too so that
+<code>rsync</code> tells me what it's doing).  This command is equivalent
+to:
+
+</p>
+
+<pre>cp -a source/. destination/
+</pre>
+
+<p>
+
+except that it's much more efficient if there are only a few differences.
+
+</p><p>
+
+Just to whet your appetite, here's a way to do the same thing as in the
+example above, but with <code>destination</code> on a remote machine, over a
+secure shell:
+
+</p>
+
+<pre>rsync -a -e ssh source/ username@remotemachine.com:/path/to/destination/
+</pre>
+
+<h4>Trailing Slashes <em>Do</em> Matter...Sometimes</h4>
+<p>
+
+This isn't really an article about <code>rsync</code>, but I would like to
+take a momentary detour to clarify one potentially confusing detail about
+its use.  You may be accustomed to commands that don't care about trailing
+slashes.  For example, if <code>a</code> and <code>b</code> are two
+directories, then <code>cp -a a b</code> is equivalent to <code>cp -a a/
+b/</code>.  However, <code>rsync</code> <em>does</em> care about the
+trailing slash, but only on the source argument.  For example, let
+<code>a</code> and <code>b</code> be two directories, with the file
+<code>foo</code> initially inside directory <code>a</code>.  Then this
+command:
+
+</p>
+
+<pre>rsync -a a b
+</pre>
+
+<p>
+
+produces <code>b/a/foo</code>, whereas this command:
+
+</p>
+
+<pre>rsync -a a/ b
+</pre>
+
+<p>
+
+produces <code>b/foo</code>.  The presence or absence of a trailing slash on
+the destination argument (<code>b</code>, in this case) has no effect.
+
+</p>
+<h3>Using the <code>--delete</code> flag</h3>
+<p>
+
+If a file was originally in both <code>source/</code> and
+<code>destination/</code> (from an earlier <code>rsync</code>, for example),
+and you delete it from <code>source/</code>, you probably want it to be
+deleted from <code>destination/</code> on the next <code>rsync</code>.
+However, the default behavior is to leave the copy at
+<code>destination/</code> in place.  Assuming you want <code>rsync</code> to
+delete any file from <code>destination/</code> that is not in
+<code>source/</code>, you'll need to use the <code>--delete</code> flag:
+
+</p>
+
+<pre>rsync -a --delete source/ destination/
+</pre>
+
+<h3>Be lazy: use <code>cron</code></h3>
+
+<p>
+
+One of the toughest obstacles to a good backup strategy is human nature; if
+there's any work involved, there's a good chance backups won't happen.
+(Witness, for example, how rarely my roommate's home PC was backed up before
+I created this system).  Fortunately, there's a way to harness human
+laziness: make <code>cron</code> do the work.
+
+</p><p>
+
+To run the rsync-with-backup command from the previous section every morning
+at 4:20 AM, for example, edit the root <code>cron</code> table: (as root)<br>
+
+</p>
+
+<pre>crontab -e
+</pre>
+
+<p>
+
+Then add the following line:<br>
+
+</p>
+
+<pre>20 4 * * * rsync -a --delete source/ destination/
+</pre>
+
+<p>
+
+Finally, save the file and exit.  The backup will happen every morning at
+precisely 4:20 AM, and root will receive the output by email.  Don't copy
+that example verbatim, though; you should use full path names (such as
+<code>/usr/bin/rsync</code> and <code>/home/source/</code>) to remove any
+ambiguity.
+
+</p>
+
+<h2>
+<a name="Incremental">Incremental backups with <code>rsync</code></a>
+</h2>
+
+<p>
+
+Since making a full copy of a large filesystem can be a time-consuming and
+expensive process, it is common to make full backups only once a week or
+once a month, and store only changes on the other days.  These are
+called "incremental" backups, and are supported by the venerable old
+<code>dump</code> and <code>tar</code> utilities, along with many others.
+
+</p><p>
+
+However, you don't have to use tape as your backup medium; it is both
+possible and vastly more efficient to perform incremental backups with
+<code>rsync</code>.
+
+</p><p>
+
+The most common way to do this is by using the <code>rsync -b
+--backup-dir=</code> combination.  I have seen examples of that usage <a href="http://rsync.samba.org/examples.html">here</a>, but I won't
+discuss it further, because there is a better way.  If you're not familiar
+with hard links, though, you should first start with the following review.
+
+</p>
+
+<h3>Review of hard links</h3>
+
+<p>
+
+We usually think of a file's name as being the file itself, but really the
+name is a <em>hard link</em>.  A given file can have more than one hard link to
+itself--for example, a directory has at least two hard links: the directory
+name and <code>.</code> (for when you're inside it).  It also has one hard
+link from each of its sub-directories (the <code>..</code> file inside each
+one).  If you have the <code>stat</code> utility installed on your machine,
+you can find out how many hard links a file has (along with a bunch of other
+information) with the command:
+
+</p>
+
+<pre>stat filename
+</pre>
+
+<p>
+
+Hard links aren't just for directories--you can create more than one link to
+a regular file too.  For example, if you have the file <code>a</code>, you
+can make a link called <code>b</code>:
+
+</p>
+
+<pre>ln a b
+</pre>
+
+<p>
+
+Now, <code>a</code> and <code>b</code> are two names for the same file, as
+you can verify by seeing that they reside at the same inode (the inode
+number will be different on your machine):
+
+</p>
+
+<pre>ls -i a
+  232177 a
+ls -i b
+  232177 b
+</pre>
+
+<p>
+
+So <code>ln a b</code> is roughly equivalent to <code>cp a b</code>, but
+there are several important differences:
+
+</p>
+
+<ol>
+
+<li>The contents of the file are only stored once, so you don't use twice
+the space.</li>
+
+<li>If you change <code>a</code>, you're changing <code>b</code>, and
+vice-versa.</li>
+
+<li>If you change the permissions or ownership of <code>a</code>, you're
+changing those of <code>b</code> as well, and vice-versa.
+
+</li><li>If you overwrite <code>a</code> by copying a third file on top of it, you
+will also overwrite <code>b</code>, unless you tell <code>cp</code> to unlink
+before overwriting.  You do this by running <code>cp</code> with the
+<code>--remove-destination</code> flag.  <strong>Notice that <code>rsync</code>
+always unlinks before overwriting!!</strong>.  Note, added 2002.Apr.10: the
+previous statement applies to changes in the file contents only, not
+permissions or ownership.</li>
+
+</ol>
+
+<p>
+
+But this raises an interesting question.  What happens if you
+<code>rm</code> one of the links?  The answer is that <code>rm</code> is a
+bit of a misnomer; it doesn't really remove a file, it just removes that one
+link to it.  A file's contents aren't truly removed until the number of
+links to it reaches zero.  In a moment, we're going to make use of that
+fact, but first, here's a word about <code>cp</code>.
+
+</p>
+
+<h3>Using <code>cp -al</code></h3>
+
+<p>
+
+In the previous section, it was mentioned that hard-linking a file is
+similar to copying it.  It should come as no surprise, then, that the
+standard GNU coreutils <code>cp</code> command comes with a <code>-l</code>
+flag that causes it to create (hard) links instead of copies (it doesn't
+hard-link directories, though, which is good; you might want to think about
+why that is).  Another handy switch for the <code>cp</code> command is
+<code>-a</code> (archive), which causes it to recurse through directories
+and preserve file owners, timestamps, and access permissions.
+
+</p><p>
+
+Together, the combination <code>cp -al</code> makes <em>what appears to
+be</em> a full copy of a directory tree, but is really just an illusion that
+takes almost no space.  If we restrict operations on the copy to adding or
+removing (unlinking) files--i.e., never changing one in place--then the
+illusion of a full copy is complete.  To the end-user, the only differences
+are that the illusion-copy takes almost no disk space and almost no time to
+generate.
+
+</p><p>
+
+2002.05.15:  Portability tip:  If you don't have GNU <code>cp</code> installed
+(if you're using a different flavor of *nix, for example), you can use
+<code>find</code> and <code>cpio</code> instead.  Simply replace
+<code>cp -al a b</code> with
+<code>cd a &amp;&amp; find . -print | cpio -dpl ../b</code>.  Thanks to
+Brage Førland for that tip.
+
+</p>
+
+<h3>Putting it all together</h3>
+
+<p>
+
+We can combine <code>rsync</code> and <code>cp -al</code> to create what
+appear to be multiple full backups of a filesystem without taking multiple
+disks' worth of space.  Here's how, in a nutshell:
+
+</p>
+
+<pre>rm -rf backup.3
+mv backup.2 backup.3
+mv backup.1 backup.2
+cp -al backup.0 backup.1
+rsync -a --delete source_directory/  backup.0/
+</pre>
+
+<p>
+
+If the above commands are run once every day, then <code>backup.0</code>,
+<code>backup.1</code>, <code>backup.2</code>, and <code>backup.3</code> will
+appear to each be a full backup of <code>source_directory/</code> as it
+appeared today, yesterday, two days ago, and three days ago,
+respectively--complete, except that permissions and ownerships in old
+snapshots will get their most recent values (thanks to J.W. Schultz for
+pointing this out).  In reality, the extra storage will be equal to the
+current size of <code>source_directory/</code> plus the total size of the
+changes over the last three days--exactly the same space that a full plus
+daily incremental backup with <code>dump</code> or <code>tar</code> would
+have taken.
+
+</p><p>
+
+Update (2003.04.23):  As of <code>rsync-2.5.6</code>, the
+<code>--link-dest</code> flag is now standard.  Instead of the separate
+<code>cp -al</code> and <code>rsync</code> lines above, you may now write:
+
+</p>
+
+<pre>mv backup.0 backup.1
+rsync -a --delete --link-dest=../backup.1 source_directory/  backup.0/
+</pre>
+
+<p>
+This method is preferred, since it preserves original permissions and
+ownerships in the backup.  However, be sure to test it--as of this writing
+some users are still having trouble getting <code>--link-dest</code> to work
+properly.  Make sure you use version 2.5.7 or later.
+</p>
+
+<p>
+Update (2003.05.02):  John Pelan writes in to suggest recycling the oldest
+snapshot instead of recursively removing and then re-creating it.  This
+should make the process go faster, especially if your file tree is very
+large:
+</p>
+
+<pre>mv backup.3 backup.tmp
+mv backup.2 backup.3
+mv backup.1 backup.2
+mv backup.0 backup.1
+mv backup.tmp backup.0
+cp -al backup.1/. backup.0
+rsync -a --delete source_directory/ backup.0/
+</pre>
+
+<p>
+
+2003.06.02: OOPS!  Rsync's link-dest option does not play well with J.
+Pelan's suggestion--the approach I previously had written above will result
+in unnecessarily large storage, because old files in backup.0 will get
+replaced and not linked.  Please only use Dr. Pelan's directory recycling if
+you use the separate <code>cp -al</code> step; if you plan to use
+<code>--link-dest</code>, start with backup.0 empty and pristine.  Apologies
+to anyone I've misled on this issue.  Thanks to Kevin Everets for pointing
+out the discrepancy to me, and to J.W. Schultz for clarifying
+<code>--link-dest</code>'s behavior.  Also note that I haven't fully tested
+the approach written above; if you have, please let me know.  Until then,
+caveat emptor!
+
+</p>
+
+<h3>I'm used to <code>dump</code> or <code>tar</code>!  This seems backward!</h3>
+
+<p>
+
+The <code>dump</code> and <code>tar</code> utilities were originally
+designed to write to tape media, which can only access files in a certain
+order.  If you're used to their style of incremental backup,
+<code>rsync</code> might seem backward.  I hope that the following example
+will help make the differences clearer.
+
+</p><p>
+
+Suppose that on a particular system, backups were done on Monday night,
+Tuesday night, and Wednesday night, and now it's Thursday.
+
+</p><p>
+
+With <code>dump</code> or <code>tar</code>, the Monday backup is the big
+("full") one. It contains everything in the filesystem being backed up.  The
+Tuesday and Wednesday "incremental" backups would be much smaller, since
+they would contain only changes since the previous day.  At some point
+(presumably next Monday), the administrator would plan to make another full
+dump.
+
+</p><p>
+
+With rsync, in contrast, the Wednesday backup is the big one.  Indeed, the
+"full" backup is always the <em>most recent</em> one.  The Tuesday directory
+would contain data only for those files that changed between Tuesday and
+Wednesday; the Monday directory would contain data for only those files that
+changed between Monday and Tuesday.
+
+</p><p>
+
+A little reasoning should convince you that the <code>rsync</code> way is
+<em>much</em> better for network-based backups, since it's only necessary to
+do a full backup once, instead of once per week.  Thereafter, only the
+changes need to be copied.  Unfortunately, you can't rsync to a tape, and
+that's probably why the <code>dump</code> and <code>tar</code> incremental
+backup models are still so popular.  But in your author's opinion, these
+should never be used for network-based backups now that <code>rsync</code>
+is available.
+
+</p>
+
+<h2>
+<a name="Isolation">Isolating the backup from the rest of the system</a>
+</h2>
+
+<p>
+
+If you take the simple route and keep your backups in another directory on
+the same filesystem, then there's a very good chance that whatever damaged
+your data will also damage your backups.  In this section, we identify a few
+simple ways to decrease your risk by keeping the backup data separate.
+
+</p>
+
+<h3>The easy (bad) way</h3>
+
+<p>
+
+In the previous section, we treated <code>/destination/</code> as if it were
+just another directory on the same filesystem.  Let's call that the easy
+(bad) approach.  It works, but it has several serious limitations:
+
+</p>
+
+<ul>
+<li>If your filesystem becomes corrupted, your backups will be corrupted
+too.</li>
+<li>If you suffer a hardware failure, such as a hard disk crash, it might be
+very difficult to reconstruct the backups.</li>
+<li>Since backups preserve permissions, your users--and any programs or
+viruses that they run--will be able to delete files from the backup.  That
+is bad.  Backups should be read-only.</li>
+<li>If you run out of free space, the backup process (which runs as root)
+might crash the system and make it difficult to recover.</li>
+<li>The easy (bad) approach offers no protection if the root account is
+compromised.</li>
+</ul>
+
+<p>
+
+Fortunately, there are several easy ways to make your backup more robust.
+
+</p>
+<h3>Keep it on a separate partition</h3>
+<p>
+
+If your backup directory is on a separate partition, then any corruption in
+the main filesystem will not normally affect the backup.  If the backup
+process runs out of disk space, it will fail, but it won't take the rest of
+the system down too.  More importantly, keeping your backups on a separate
+partition means you can keep them mounted read-only; we'll discuss that in
+more detail in the next chapter.
+
+</p>
+<h3>Keep that partition on a separate disk</h3>
+<p>
+
+If your backup partition is on a separate hard disk, then you're also
+protected from hardware failure.  That's very important, since hard disks
+always fail eventually, and often take your data with them.  An entire
+industry has formed to service the needs of those whose broken hard disks
+contained important data that was not properly backed up.
+
+</p><p class="important">
+
+<strong>Important</strong>: Notice, however, that in the event of hardware
+failure you'll still lose any changes made since the last backup.  For home
+or small office users, where backups are made daily or even hourly as
+described in this document, that's probably fine, but in situations where
+any data loss at all would be a serious problem (such as where financial
+transactions are concerned), a RAID system might be more appropriate.
+
+</p><p>
+
+RAID is well-supported under Linux, and the methods described in this
+document can also be used to create rotating snapshots of a RAID system.
+
+</p>
+<h3>Keep that disk on a separate machine</h3>
+<p>
+
+If you have a spare machine, even a very low-end one, you can turn it into a
+dedicated backup server.  Make it standalone, and keep it in a physically
+separate place--another room or even another building.  Disable every single
+remote service on the backup server, and connect it only to a dedicated
+network interface on the source machine.
+
+</p><p>
+
+On the source machine, export the directories that you want to back up via
+read-only NFS to the dedicated interface.  The backup server can mount the
+exported network directories and run the snapshot routines discussed in this
+article as if they were local.  If you opt for this approach, you'll only be
+remotely vulnerable if:
+
+</p><ol>
+<li>a remote root hole is discovered in read-only NFS, and</li>
+<li>the source machine has already been compromised.</li>
+</ol>
+
+<p>
+
+I'd consider this "pretty good" protection, but if you're (wisely) paranoid,
+or your job is on the line, build two backup servers.  Then you can make
+sure that at least one of them is always offline.
+
+</p><p>
+
+If you're using a remote backup server and can't get a dedicated line to it
+(especially if the information has to cross somewhere insecure, like the
+public internet), you should probably skip the NFS approach and use
+<code>rsync -e ssh</code> instead.
+
+</p>
+
+<p class="important">
+
+It has been pointed out to me that <code>rsync</code> operates far more
+efficiently in server mode than it does over NFS, so if the connection
+between your source and backup server becomes a bottleneck, you should
+consider configuring the backup machine as an rsync server instead of using
+NFS.  On the downside, this approach is slightly less transparent to users
+than NFS--snapshots would not appear to be mounted as a system directory,
+unless NFS is used in that direction, which is certainly another option (I
+haven't tried it yet though).  Thanks to Martin Pool, a lead developer of
+<code>rsync</code>, for making me aware of this issue.
+
+</p>
+
+<p>
+
+Here's another example of the utility of this approach--one that I use.  If
+you have a bunch of windows desktops in a lab or office, an easy way to keep
+them all backed up is to share the relevant files, read-only, and mount them
+all from a dedicated backup server using SAMBA.  The backup job can treat
+the SAMBA-mounted shares just like regular local directories.
+
+</p>
+
+<h2>
+<a name="ReadOnly">Making the backup as read-only as possible</a>
+</h2>
+
+<p>
+
+In the previous section, we discussed ways to keep your backup data
+physically separate from the data they're backing up.  In this section, we
+discuss the other side of that coin--preventing user processes from
+modifying backups once they're made.
+
+</p><p>
+
+We want to avoid leaving the <code>snapshot</code> backup directory mounted
+read-write in a public place.  Unfortunately, keeping it mounted read-only
+the whole time won't work either--the backup process itself needs write
+access.  The ideal situation would be for the backups to be mounted
+read-only in a public place, but at the same time, read-write in a private
+directory accessible only by root, such as <code>/root/snapshot</code>.
+
+</p><p>
+
+There are a number of possible approaches to the challenge presented by
+mounting the backups read-only.  After some amount of thought, I found a
+solution which allows root to write the backups to the directory but only
+gives the users read permissions.  I'll first explain the other ideas I had
+and why they were less satisfactory.
+
+</p><p>
+
+It's tempting to keep your backup partition mounted read-only as
+<code>/snapshot</code> most of the time, but unmount that and remount it
+read-write as <code>/root/snapshot</code> during the brief periods while
+snapshots are being made.  Don't give in to temptation!.
+
+</p>
+
+<h3>Bad: <code>mount</code>/<code>umount</code></h3>
+<p>
+
+A filesystem cannot be unmounted if it's busy--that is, if some process is
+using it.  The offending process need not be owned by root to block an
+unmount request.  So if you plan to <code>umount</code> the read-only copy
+of the backup and <code>mount</code> it read-write somewhere else,
+don't--any user can accidentally (or deliberately) prevent the backup from
+happening.  Besides, even if blocking unmounts were not an issue, this
+approach would introduce brief intervals during which the backups would seem
+to vanish, which could be confusing to users.
+
+</p>
+
+<h3>Better: <code>mount</code> read-only most of the time</h3>
+<p>
+
+A better but still-not-quite-satisfactory choice is to remount the directory
+read-write in place:
+
+</p>
+
+<pre>mount -o remount,rw /snapshot
+[ run backup process ]
+mount -o remount,ro /snapshot
+</pre>
+
+<p>
+
+Now any process that happens to be in <code>/snapshot</code> when the
+backups start will not prevent them from happening.  Unfortunately, this
+approach introduces a new problem--there is a brief window of vulnerability,
+while the backups are being made, during which a user process could write to
+the backup directory.  Moreover, if any process opens a backup file for
+writing during that window, it will prevent the backup from being remounted
+read-only, and the backups will stay vulnerable indefinitely.
+
+</p>
+
+<h3>Tempting but doesn't seem to work: the 2.4 kernel's <code>mount --bind</code></h3>
+<p>
+
+Starting with the 2.4-series Linux kernels, it has been possible to mount a
+filesystem simultaneously in two different places.  "Aha!" you might think,
+as I did.  "Then surely we can mount the backups read-only in
+<code>/snapshot</code>, and read-write in <code>/root/snapshot</code> at the
+same time!"
+
+</p><p>
+
+Alas, no.  Say your backups are on the partition <code>/dev/hdb1</code>.  If
+you run the following commands,
+
+</p>
+
+<pre>mount /dev/hdb1 /root/snapshot
+mount --bind -o ro /root/snapshot /snapshot
+</pre>
+
+<p>
+
+then (at least as of the 2.4.9 Linux kernel--updated, still present in the
+2.4.20 kernel), <code>mount</code> will report <code>/dev/hdb1</code> as being
+mounted read-write in <code>/root/snapshot</code> and read-only in
+<code>/snapshot</code>, just as you requested.  Don't let the system mislead
+you!
+
+</p>
+<p class="important">
+
+It seems that, at least on my system, read-write vs. read-only is a property
+of the filesystem, not the mount point.  So every time you change the mount
+status, it will affect the status at every point the filesystem is mounted,
+even though neither <code>/etc/mtab</code> nor <code>/proc/mounts</code>
+will indicate the change.
+
+</p><p>
+
+In the example above, the second <code>mount</code> call will cause both of
+the mounts to become read-only, and the backup process will be unable to
+run.  Scratch this one.
+
+</p><p>
+
+Update: I have it on fairly good authority that this behavior is considered
+a bug in the Linux kernel, which will be fixed as soon as someone gets
+around to it.  If you are a kernel maintainer and know more about this
+issue, or are willing to fix it, I'd love to hear from you!
+
+</p>
+
+<h3>My solution: using NFS on localhost</h3>
+<p>
+
+This is a bit more complicated, but until Linux supports <code>mount
+--bind</code> with different access permissions in different places, it
+seems like the best choice.  Mount the partition where backups are stored
+somewhere accessible only by root, such as <code>/root/snapshot</code>.
+Then export it, read-only, via NFS, but only to the same machine.  That's as
+simple as adding the following line to <code>/etc/exports</code>:
+
+</p>
+
+<pre>/root/snapshot 127.0.0.1(secure,ro,no_root_squash)
+</pre>
+
+<p>
+
+then start <code>nfs</code> and <code>portmap</code> from
+<code>/etc/rc.d/init.d/</code>.  Finally mount the exported directory,
+read-only, as <code>/snapshot</code>:
+
+</p>
+
+<pre>mount -o ro 127.0.0.1:/root/snapshot /snapshot
+</pre>
+
+<p>
+
+And verify that it all worked:
+
+</p>
+
+<pre>mount
+...
+/dev/hdb1 on /root/snapshot type ext3 (rw)
+127.0.0.1:/root/snapshot on /snapshot type nfs (ro,addr=127.0.0.1)
+</pre>
+
+<p>
+
+At this point, we'll have the desired effect: only root will be able to
+write to the backup (by accessing it through <code>/root/snapshot</code>).
+Other users will see only the read-only <code>/snapshot</code> directory.
+For a little extra protection, you could keep mounted read-only in
+<code>/root/snapshot</code> most of the time, and only remount it read-write
+while backups are happening.
+
+</p>
+<p>
+
+Damian Menscher pointed out <a href="http://www.cert.org/advisories/CA-1994-15.html">this CERT advisory</a>
+which specifically recommends <em>against</em> NFS exporting to localhost,
+though since I'm not clear on why it's a problem, I'm not sure whether
+exporting the backups read-only as we do here is also a problem.  If you
+understand the rationale behind this advisory and can shed light on it,
+would you please contact me?  Thanks!
+
+</p>
+
+
+<h2>
+<a name="Extensions">Extensions: hourly, daily, and weekly snapshots</a>
+</h2>
+
+<p>
+
+With a little bit of tweaking, we make multiple-level rotating snapshots.
+On my system, for example, I keep the last four "hourly" snapshots (which
+are taken every four hours) as well as the last three "daily" snapshots
+(which are taken at midnight every day).  You might also want to keep
+weekly or even monthly snapshots too, depending upon your needs and your
+available space.
+
+</p>
+
+<h3>Keep an extra script for each level</h3>
+
+<p>
+
+This is probably the easiest way to do it.  I keep one script that runs
+every four hours to make and rotate hourly snapshots, and another script
+that runs once a day rotate the daily snapshots.  There is no need to use
+rsync for the higher-level snapshots; just cp -al from the appropriate
+hourly one.
+
+</p>
+
+<h3>Run it all with <code>cron</code></h3>
+
+<p>
+
+To make the automatic snapshots happen, I have added the following lines to
+root's <code>crontab</code> file:
+
+</p>
+
+<pre>0 */4 * * * /usr/local/bin/make_snapshot.sh
+0 13 * * *  /usr/local/bin/daily_snapshot_rotate.sh
+</pre>
+
+<p>
+
+They cause <code>make_snapshot.sh</code> to be run every four hours on the
+hour and <code>daily_snapshot_rotate.sh</code> to be run every day at 13:00
+(that is, 1:00 PM).  I have included those scripts in the appendix.
+
+</p><p>
+
+If you tire of receiving an email from the <code>cron</code> process every
+four hours with the details of what was backed up, you can tell it to send
+the output of <code>make_snapshot.sh</code> to <code>/dev/null</code>, like
+so:
+
+</p>
+
+<pre>0 */4 * * * /usr/local/bin/make_snapshot.sh &gt;/dev/null 2&gt;&amp;1
+</pre>
+
+<p>
+
+Understand, though, that this will prevent you from seeing errors if
+<code>make_snapshot.sh</code> cannot run for some reason, so be careful with
+it.  Creating a third script to check for any unusual behavior in the
+snapshot periodically seems like a good idea, but I haven't implemented it
+yet.   Alternatively, it might make sense to log the output of each run, by
+piping it through <code>tee</code>, for example.  mRgOBLIN wrote in to
+suggest a better (and obvious, in retrospect!) approach, which is to send
+stdout to /dev/null but keep stderr, like so:
+
+</p>
+
+<pre>0 */4 * * * /usr/local/bin/make_snapshot.sh &gt;/dev/null
+</pre>
+
+<p>
+
+Presto!  Now you only get mail when there's an error.  :)
+
+</p>
+
+<h2>
+<a name="Appendix">Appendix: my actual configuration</a>
+</h2>
+
+<p class="important">
+
+I know that listing my actual backup configuration here is a security risk;
+please be kind and don't use this information to crack my site.  However,
+I'm not a security expert, so if you see any vulnerabilities in my setup,
+I'd greatly appreciate your help in fixing them.  Thanks!
+
+</p><p>
+
+I actually use two scripts, one for every-four-hours (hourly) snapshots, and
+one for every-day (daily) snapshots.  I am only including the parts of the
+scripts that relate to backing up <code>/home</code>, since those are
+relevant ones here.
+
+</p><p>
+
+I use the NFS-to-localhost trick of exporting <code>/root/snapshot</code>
+read-only as <code>/snapshot</code>, as discussed above.
+
+</p><p>
+
+The system has been running without a hitch for months.
+
+</p>
+
+<h3>Listing one: <code>make_snapshot.sh</code></h3>
+
+<pre>#!/bin/bash
+# ----------------------------------------------------------------------
+# mikes handy rotating-filesystem-snapshot utility
+# ----------------------------------------------------------------------
+# this needs to be a lot more general, but the basic idea is it makes
+# rotating backup-snapshots of /home whenever called
+# ----------------------------------------------------------------------
+
+unset PATH	# suggestion from H. Milz: avoid accidental use of $PATH
+
+# ------------- system commands used by this script --------------------
+ID=/usr/bin/id;
+ECHO=/bin/echo;
+
+MOUNT=/bin/mount;
+RM=/bin/rm;
+MV=/bin/mv;
+CP=/bin/cp;
+TOUCH=/bin/touch;
+
+RSYNC=/usr/bin/rsync;
+
+
+# ------------- file locations -----------------------------------------
+
+MOUNT_DEVICE=/dev/hdb1;
+SNAPSHOT_RW=/root/snapshot;
+EXCLUDES=/usr/local/etc/backup_exclude;
+
+
+# ------------- the script itself --------------------------------------
+
+# make sure we're running as root
+if (( `$ID -u` != 0 )); then { $ECHO "Sorry, must be root.  Exiting..."; exit; } fi
+
+# attempt to remount the RW mount point as RW; else abort
+$MOUNT -o remount,rw $MOUNT_DEVICE $SNAPSHOT_RW ;
+if (( $? )); then
+{
+	$ECHO "snapshot: could not remount $SNAPSHOT_RW readwrite";
+	exit;
+}
+fi;
+
+
+# rotating snapshots of /home (fixme: this should be more general)
+
+# step 1: delete the oldest snapshot, if it exists:
+if [ -d $SNAPSHOT_RW/home/hourly.3 ] ; then			\
+$RM -rf $SNAPSHOT_RW/home/hourly.3 ;				\
+fi ;
+
+# step 2: shift the middle snapshots(s) back by one, if they exist
+if [ -d $SNAPSHOT_RW/home/hourly.2 ] ; then			\
+$MV $SNAPSHOT_RW/home/hourly.2 $SNAPSHOT_RW/home/hourly.3 ;	\
+fi;
+if [ -d $SNAPSHOT_RW/home/hourly.1 ] ; then			\
+$MV $SNAPSHOT_RW/home/hourly.1 $SNAPSHOT_RW/home/hourly.2 ;	\
+fi;
+
+# step 3: make a hard-link-only (except for dirs) copy of the latest snapshot,
+# if that exists
+if [ -d $SNAPSHOT_RW/home/hourly.0 ] ; then			\
+$CP -al $SNAPSHOT_RW/home/hourly.0 $SNAPSHOT_RW/home/hourly.1 ;	\
+fi;
+
+# step 4: rsync from the system into the latest snapshot (notice that
+# rsync behaves like cp --remove-destination by default, so the destination
+# is unlinked first.  If it were not so, this would copy over the other
+# snapshot(s) too!
+$RSYNC								\
+	-va --delete --delete-excluded				\
+	--exclude-from="$EXCLUDES"				\
+	/home/ $SNAPSHOT_RW/home/hourly.0 ;
+
+# step 5: update the mtime of hourly.0 to reflect the snapshot time
+$TOUCH $SNAPSHOT_RW/home/hourly.0 ;
+
+# and thats it for home.
+
+# now remount the RW snapshot mountpoint as readonly
+
+$MOUNT -o remount,ro $MOUNT_DEVICE $SNAPSHOT_RW ;
+if (( $? )); then
+{
+	$ECHO "snapshot: could not remount $SNAPSHOT_RW readonly";
+	exit;
+} fi;
+</pre>
+
+<p>
+
+As you might have noticed above, I have added an excludes list to the
+<code>rsync</code> call.  This is just to prevent the system from backing up
+garbage like web browser caches, which change frequently (so they'd take up
+space in every snapshot) but would be no loss if they were accidentally
+destroyed.
+
+</p>
+
+<h3>Listing two: <code>daily_snapshot_rotate.sh</code></h3>
+
+<pre>#!/bin/bash
+# ----------------------------------------------------------------------
+# mikes handy rotating-filesystem-snapshot utility: daily snapshots
+# ----------------------------------------------------------------------
+# intended to be run daily as a cron job when hourly.3 contains the
+# midnight (or whenever you want) snapshot; say, 13:00 for 4-hour snapshots.
+# ----------------------------------------------------------------------
+
+unset PATH
+
+# ------------- system commands used by this script --------------------
+ID=/usr/bin/id;
+ECHO=/bin/echo;
+
+MOUNT=/bin/mount;
+RM=/bin/rm;
+MV=/bin/mv;
+CP=/bin/cp;
+
+# ------------- file locations -----------------------------------------
+
+MOUNT_DEVICE=/dev/hdb1;
+SNAPSHOT_RW=/root/snapshot;
+
+# ------------- the script itself --------------------------------------
+
+# make sure we're running as root
+if (( `$ID -u` != 0 )); then { $ECHO "Sorry, must be root.  Exiting..."; exit; } fi
+
+# attempt to remount the RW mount point as RW; else abort
+$MOUNT -o remount,rw $MOUNT_DEVICE $SNAPSHOT_RW ;
+if (( $? )); then
+{
+	$ECHO "snapshot: could not remount $SNAPSHOT_RW readwrite";
+	exit;
+}
+fi;
+
+
+# step 1: delete the oldest snapshot, if it exists:
+if [ -d $SNAPSHOT_RW/home/daily.2 ] ; then			\
+$RM -rf $SNAPSHOT_RW/home/daily.2 ;				\
+fi ;
+
+# step 2: shift the middle snapshots(s) back by one, if they exist
+if [ -d $SNAPSHOT_RW/home/daily.1 ] ; then			\
+$MV $SNAPSHOT_RW/home/daily.1 $SNAPSHOT_RW/home/daily.2 ;	\
+fi;
+if [ -d $SNAPSHOT_RW/home/daily.0 ] ; then			\
+$MV $SNAPSHOT_RW/home/daily.0 $SNAPSHOT_RW/home/daily.1;	\
+fi;
+
+# step 3: make a hard-link-only (except for dirs) copy of
+# hourly.3, assuming that exists, into daily.0
+if [ -d $SNAPSHOT_RW/home/hourly.3 ] ; then			\
+$CP -al $SNAPSHOT_RW/home/hourly.3 $SNAPSHOT_RW/home/daily.0 ;	\
+fi;
+
+# note: do *not* update the mtime of daily.0; it will reflect
+# when hourly.3 was made, which should be correct.
+
+# now remount the RW snapshot mountpoint as readonly
+
+$MOUNT -o remount,ro $MOUNT_DEVICE $SNAPSHOT_RW ;
+if (( $? )); then
+{
+	$ECHO "snapshot: could not remount $SNAPSHOT_RW readonly";
+	exit;
+} fi;
+</pre>
+
+<h3>Sample output of <code>ls -l /snapshot/home</code></h3>
+
+<pre>total 28
+drwxr-xr-x   12 root     root         4096 Mar 28 00:00 daily.0
+drwxr-xr-x   12 root     root         4096 Mar 27 00:00 daily.1
+drwxr-xr-x   12 root     root         4096 Mar 26 00:00 daily.2
+drwxr-xr-x   12 root     root         4096 Mar 28 16:00 hourly.0
+drwxr-xr-x   12 root     root         4096 Mar 28 12:00 hourly.1
+drwxr-xr-x   12 root     root         4096 Mar 28 08:00 hourly.2
+drwxr-xr-x   12 root     root         4096 Mar 28 04:00 hourly.3
+</pre>
+
+<p>
+
+Notice that the contents of each of the subdirectories of
+<code>/snapshot/home/</code> is a complete image of <code>/home</code> at
+the time the snapshot was made.  Despite the <code>w</code> in the directory
+access permissions, no one--not even root--can write to this directory; it's
+mounted read-only.
+
+</p>
+
+<h2>
+<a name="Bugs">Bugs</a>
+</h2>
+
+<h3>Maintaining Permissions and Owners in the snapshots</h3>
+
+<p>
+
+The snapshot system above does not properly maintain old
+ownerships/permissions; if a file's ownership or permissions are changed in
+place, then the new ownership/permissions will apply to older snapshots as
+well.  This is because <code>rsync</code> does not unlink files prior to
+changing them if the only changes are ownership/permission.  Thanks to J.W.
+Schultz for pointing this out.  Using his new <code>--link-dest</code>
+option, it is now trivial to work around this problem.  See the discussion in
+the <em>Putting it all together</em> section of <a href="http://www.mikerubel.org/computers/rsync_snapshots/#Incremental">Incremental backups with <code>rsync</code></a>, above.
+
+</p>
+
+<h3><code>mv</code> updates timestamp bug</h3>
+
+<p>
+
+Apparently, a bug in some Linux kernels between 2.4.4 and 2.4.9 causes
+<code>mv</code> to update timestamps; this may result in inaccurate
+timestamps on the snapshot directories.  Thanks to Claude Felizardo for
+pointing this problem out.  He was able to work around the problem my
+replacing <code>mv</code> with the following script:
+
+</p>
+
+<pre>MV=my_mv;
+...
+function my_mv() {
+   REF=/tmp/makesnapshot-mymv-$$;
+   touch -r $1 $REF;
+   /bin/mv $1 $2;
+   touch -r $REF $2;
+   /bin/rm $REF;
+}
+</pre>
+
+<h3>Windows-related problems</h3>
+
+<p>
+
+I have recently received a few reports of what appear to be interaction
+issues between Windows and rsync.
+
+</p><p>
+
+One report came from a user who mounts a windows share via Samba, much as I
+do, and had files mysteriously being deleted from the backup even when they
+weren't deleted from the source.  Tim Burt also used this technique, and was
+seeing files copied even when they hadn't changed.  He determined that the
+problem was modification time precision; adding --modify-window=10 caused
+rsync to behave correctly in both cases.  <em>If you are rsync'ing from a
+SAMBA share, you must add --modify-window=10</em> or you may get
+inconsistent results.  Update: --modify-window=1 should be sufficient.
+Yet another update: the problem appears to still be there.  Please let me
+know if you use this method and files which should not be deleted are
+deleted.
+
+</p><p>
+
+Also, for those who use rsync directly on cygwin, there are some known
+problems, apparently related to cygwin signal handling.  Scott Evans reports
+that rsync sometimes hangs on large directories.  Jim Kleckner informed me
+of an rsync patch, discussed <a href="http://www.cygwin.com/ml/cygwin/2002-10/msg00308.html">here</a> and <a href="http://sources.redhat.com/ml/cygwin/2002-09/msg01155.html">here</a>,
+which seems to work around this problem.  I have several reports of this
+working, and two reports of it not working (the hangs continue).  However,
+one of the users who reported a negative outcome, Greg Boyington, was able
+to get it working using Craig Barrett's suggested sleep() approach, which is
+documented <a href="http://www.mail-archive.com/rsync@lists.samba.org/msg07402.html">here</a>.
+
+</p><p>
+
+Memory use in rsync scales linearly with the number of files being sync'd.
+This is a problem when syncing large file trees, especially when the server
+involved does not have a lot of RAM.  If this limitation is more of an issue
+to you than network speed (for example, if you copy over a LAN), you may
+wish to use <a href="http://mirrordir.sourceforge.net/">mirrordir</a>
+instead.  I haven't tried it personally, but it looks promising.  Thanks to
+Vladimir Vuksan for this tip!
+
+</p>
+
+
+<h2>
+<a name="Contrib">Contributed codes</a>
+</h2>
+
+<p>
+
+Several people have been kind enough to send improved backup scripts.  There
+are a number of good ideas here, and I hope they'll save you time when you're
+ready to design your own backup plan.  Disclaimer: I have not necessarily
+tested these; make sure you check the source code and test them thoroughly
+before use!
+
+</p>
+
+<ul>
+
+<li>Art Mulder's original <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/art_mulder_1">shell
+script</a></li>
+
+<li>Art Mulder's improved <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/snapback">snapback</a> Perl
+script, and a sample <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/snapback.conf">snapback.conf</a> configuration file</li>
+
+<li>Henry Laxen's <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/henry_laxen">perl script</a></li>
+
+<li>J. P. Stewart's <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/j_p_stewart">shell script</a></li>
+
+<li>Sean Herdejurgen's <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/sean_herdejurgen">shell_script</a></li>
+
+<li>Peter Schneider-Kamp's <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/peter_schneider-kamp">shell script</a></li>
+
+<li>Rob Bos' versatile, GPL'd <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/rob_bos">shell
+script</a>.  <em>Update!</em> 2002.12.13: check out his <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/rob_bos_snapshot-0.7.tar.gz">new package</a> that makes for easier configuration and fixes a couple of bugs.</li>
+
+<li>Leland Elie's very nice GPL'd Python script, <a href="http://web2.airmail.net/lelie/roller.py">roller.py</a> (2004.04.13:
+note link seems to be down).  Does locking for safety, has a
+<code>/etc/roller.conf</code> control script which can pull from multiple
+machines automatically and independently.</li>
+
+<li>William Stearns' <a href="http://www.stearns.org/rsync-backup/">rsync backup for the extremely security-conscious</a>.  I haven't played with this yet, but it looks promising!</li>
+
+<li>Geordy Kitchen's <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/geordy_kitchen">shell script</a>, adapted from Rob Bos' above</li>
+
+<li>Tim Evans' <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/tim_evans_rbackup.py">python rbackup
+functions</a> and the <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/tim_evans_rbackup">calling
+script</a>.  You'll have to rename them before using.</li>
+
+<li>Elio Pizzottelli's <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/elio_pizzottelli">improved version of make_snapshot.sh</a>, released under the GPL</li>
+
+<li>John Bowman's <a href="http://www.math.ualberta.ca/imaging/rlbackup">
+rlbackup</a> utility, which (in his words) provides a simple secure
+mechanism for generating and recovering linked backups over the network,
+with historical pruning.  This one makes use of the --link-dest patch, and
+keeps a geometric progression of snapshots instead of doing
+hourly/daily/weekly.
+</li>
+
+<li>Ben Gardiner's much-improved <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/ben_gardiner">boglin</a> script</li>
+
+<li>Darrel O'Pry contributes a <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/darrel_o_pry">script</a>
+modified to handle mysql databases.  Thanks, Darrel!  He also contributes a
+<a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/darrel_o_pry_2">restore script</a> which works with
+Geordy Kitchen's backup script.</li>
+
+<li>Craig Jones <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/craig_jones">contributes</a> a modified
+and enhanced version of make_snapshot.sh.</li>
+
+<li>Here is a very schnazzy <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/bart_vetters">perl
+script</a> from Bart Vetters with built-in POD documentation
+
+</li><li>Stuart Sheldon has contributed <a href="http://mirror.actusa.net/pub/sample-files/mirror.dist">mirror.dist</a>,
+a substantial improvement to the original shell script.
+</li>
+
+<li>Aaron Freed contributed two scripts from his <a href-"http:="" kludgekollection.lafeyette.net"="">KludgeKollection</a> page, <a href="http://kludgekollection.lafeyette.net/snapback">snapback</a> and <a href="http://kludgekollection.lafeyette.net/snaptrol">snaptrol</a>.</li>
+
+</ul>
+
+<h2>
+<a name="References">References</a>
+</h2>
+
+<ul>
+
+<li><a href="http://rsync.samba.org/">Rsync main site</a></li>
+
+<li><a href="http://www.nongnu.org/rdiff-backup/">rdiff-backup</a>, Ben
+Escoto's remote incremental backup utility</li>
+
+<li><a href="http://www.gnu.org/software/coreutils/">The GNU coreutils package</a> (which includes the part formerly known as fileutils, thanks to Nathan Rosenquist for pointing that out to me).</li>
+
+<li><a href="http://www.pegasys.ws/dirvish">dirvish</a>, a similar but slightly more sophisticated tool from J.W. Schultz.</li>
+
+<li><a href="http://www.pollux.franken.de/hjb/rsback">rsback</a>, a backup
+front-end for rsync, by Hans-Juergen Beie.</li>
+
+<li><a href="http://freshmeat.net/projects/ssync/">ssync</a>, a simple sync utility which can be used instead of rsync in certain cases.  Thanks to Patrick Finerty Jr. for the link.</li>
+
+<li><a href="http://bobs.sf.net/">bobs</a>, the Browseable Online Backup System, with a snazzy web interface; I look forward to trying it!  Thanks to Rene Rask.</li>
+
+<li><a href="http://www.sistina.com/products_lvm.htm">LVM</a>, the Logical Volume Manager for Linux.  In the context of LVM, <em>snapshot</em> means one image of the filesystem, frozen in time.  Might be used in conjunction with some of the methods described on this page.</li>
+
+<li><a href="http://igmus.org/code/">glastree</a>, a very nice snapshot-style backup utility from Jeremy Wohl</li>
+
+<li><a href="http://mirrordir.sourceforge.net/">mirrordir</a>, a less
+memory-intensive (but more network-intensive) way to do the copying.</li>
+
+<li>A filesystem-level backup utility, rumored to be similar to Glastree and
+very complete and usable: <a href="http://www.sourceforge.net/projects/storebackup">storebackup</a>.  Thanks to Arthur Korn for the link!</li>
+
+<li>Gary Burd has posted a <a href="http://gary.burd.info/content/news/25.html">page</a> which discusses
+how to use this sort of technique to back up laptops.  He includes a very
+nice python script with it.</li>
+
+<li>Jason Rust implemented something like this in a php script called RIBS.
+You can find it <a href="http://www.rustyparts.com/scripts.php">here</a>.
+Thanks Jason!</li>
+
+<li>Robie Basak pointed out to me that debian's fakeroot utility can help
+protect a backup server even if one of the machines it's backing up is
+compromised and an exploitable hole is discovered in rsync (this is a bit of
+a long shot, but in the backup business you really do have to be paranoid).
+He sent me this <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/robie_basak">script</a> along with <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/robie_basak_note">this note</a> explaining it.
+</li>
+
+<li>Michael Mayer wrote a handy and similar tutorial which is rather nicer
+than this one--has screenshots and everything!  You can find it <a href="http://www.mag37.com/tips/backups.html">here</a>.</li>
+
+<li>The <a href="http://rsnapshot.org/">rsnapshot project</a> by Nathan
+Rosenquist which provides several extensions and features beyond the basic
+script here, and is really organized--it seems to be at a level which makes
+it more of a real package than a do-it-yourself hack like this page is.
+Check it out!</li>
+
+<li>Abe Loveless has written <a href="http://www.tech-geeks.org/contrib/loveless/rsync_backup/SME_BackupServer.html">a
+howto</a> for applying the rsync/hardlink backup strategy on the <a href="http://www.e-smith.org/">e-smith distribution</a>.</li>
+
+
+<li>Mike Heins wrote <a href="http://www.perusion.com/misc/Snapback2/">Snapback2</a>, a highly
+improved adapation of Art Mulder's original script, which includes (among
+other features) an apache-style configuration file, multiple redundant
+backup destinations, and safety features.</li>
+
+<li>Poul Petersen's <a href="http://www.alleft.com/projects/wombat">Wombat</a> backup system,
+written in Perl, supports threading for multiple simultaneous
+backups.</li>
+
+</ul>
+
+<h2>
+<a name="FAQ">Frequently Asked Questions</a>
+</h2>
+
+<ul>
+
+<li>
+<ul><li>
+Q: What happens if a file is modified while the backup is taking place?
+</li>
+<li>
+A: In rsync, transfers are done to a temporary file, which is cut over
+atomically, so the transfer either happens in its entirety or not at all.
+Basically, rsync does "the right thing," so you won't end up with
+partially-backed-up files.  Thanks to Filippo Carletti for pointing this out.
+If you absolutely need a snapshot from a single instant in time, consider using
+Sistina's LVM (see reference above).
+</li></ul>
+</li>
+
+<li>
+<ul><li>
+Q:  I really need the original permissions and ownerships in the snapshots, and not the latest ones.  How can I accomplish that?</li>
+<li>
+A: J.W. Schultz has created a --link-dest patch for rsync which takes care of the hard-linking part of this trick (instead of cp -al).  It can preserve permissions and ownerships.  As of <code>rsync-2.5.6</code>, it is now standard.  See the discussion above.
+</li></ul>
+</li>
+
+<li>
+<ul><li>
+Q: I am backing up a cluster of machines (clients) to a backup server (server).  What's the best way to pull data from each machine in the cluster?
+</li>
+<li>
+A: Run sshd on each machine in the cluster.  Create a passwordless key pair on the server, and give the public key to each of the client machines, restricted to the rsync command only (with PermitRootLogin set to forced-commands-only in the sshd_config file).
+</li></ul>
+</li>
+
+<li>
+<ul><li>
+Q: I am backing up many different machines with user accounts not
+necessarily shared by the backup server.  How should I handle this?
+</li>
+<li>
+A: Be sure to use the <code>--numeric-ids</code> option to rsync so that
+ownership is not confused on the restore.  Thanks to <a href="mailto:jon@endpoint.com">Jon Jensen</a> for this tip!
+</li></ul>
+</li>
+
+<li>
+<ul><li>
+Q: Can I see a nontrivial example involving rsync include an exclude rules?
+</li>
+<li>
+A: Martijn Kruissen sent in an email which includes a nice example; I've
+posted part of it <a href="http://www.mikerubel.org/computers/rsync_snapshots/contributed/martijn_kruissen">here</a>.
+</li></ul>
+</li>
+
+</ul>
+</div>
+
+<table class="footer"><tbody><tr><td>
+<a href="http://www.mikerubel.org/about/index.html#copyright">© Rubel 2004</a> | <a href="http://www.mikerubel.org/about/index.html">About this site</a>
+</td></tr></tbody></table>
+</div>
+
+
+
+</body></html>
